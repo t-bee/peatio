@@ -1,0 +1,58 @@
+datasources:
+  - adapter: coingecko
+    seed_filename: "coingecko-ethereum.yml"
+    filters:
+      coingecko_ids: []                 # Specify assets coingecko ids you want to include in generated seed file.
+      market_cap_rank: 20               # Minimum market cup rank required for asset to be included in generated seed file.
+      asset_platform_ids: ["ethereum"]  # Coingecko asset_platform_ids for assets filtering. E.g only ones with ethereum will be include.
+
+    blockchain_mapping:
+      ethereum: eth-mainnet
+    wallets_mapping:
+      hot:
+        ethereum: 1
+      warm:
+        ethereum: 2
+      cold:
+        ethereum: 3
+
+    base_currency: usd
+    tarrifs:
+      # Defined in base currency
+      deposit_fee:            1
+      min_deposit_amount:     1
+      min_collection_amount:  1
+      withdrawa_fee:          1
+      withdraw_limit_24h:     1
+      withdraw_limit_72h:     3
+
+
+#  name                  :string(255)
+#  blockchain_key        :string(32)
+#  symbol                :string(1)        not null
+#  type                  :string(30)       default("coin"), not null
+#  deposit_fee           :decimal(32, 16)  default("0.0000000000000000"), not null
+#  min_deposit_amount    :decimal(32, 16)  default("0.0000000000000000"), not null
+#  min_collection_amount :decimal(32, 16)  default("0.0000000000000000"), not null
+#  withdraw_fee          :decimal(32, 16)  default("0.0000000000000000"), not null
+#  min_withdraw_amount   :decimal(32, 16)  default("0.0000000000000000"), not null
+#  withdraw_limit_24h    :decimal(32, 16)  default("0.0000000000000000"), not null
+#  withdraw_limit_72h    :decimal(32, 16)  default("0.0000000000000000"), not null
+#  position              :integer          default("0"), not null
+#  options               :string(1000)     default("{}")
+#  visible               :boolean          default("1"), not null
+#  deposit_enabled       :boolean          default("1"), not null
+#  withdrawal_enabled    :boolean          default("1"), not null
+#  base_factor           :bigint           default("1"), not null
+#  precision             :integer          default("8"), not null
+#  icon_url              :string(255)
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#
+# Indexes
+#
+#  index_currencies_on_position  (position)
+#  index_currencies_on_visible   (visible)
+
+
+
