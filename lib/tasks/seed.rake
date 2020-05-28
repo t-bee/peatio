@@ -94,4 +94,11 @@ namespace :seed do
       end
     end
   end
+
+  desc 'Fetch information about currencies from Coingecko'
+  task prepare: :environment do
+    YAML.load_file(Rails.root.join('config/seed-v2/datasource.yml')).fetch("datasources").each do |datasource|
+      PrefillService.new(datasource.deep_symbolize_keys).perform
+    end
+  end
 end
