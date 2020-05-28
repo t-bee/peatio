@@ -2,12 +2,16 @@ datasources:
   - adapter: coingecko
     seed_filename: "coingecko-ethereum.yml"
     filters:
-      coingecko_ids: []                 # Specify assets coingecko ids you want to include in generated seed file.
-      market_cap_rank: 20               # Minimum market cup rank required for asset to be included in generated seed file.
+      coingecko_ids: ["binancecoin", "bitcoin"]                 # Specify assets coingecko ids you want to include in generated seed file.
+      market_cap_rank: 20               # Minimum market cap rank required for asset to be included in generated seed file.
       asset_platform_ids: ["ethereum"]  # Coingecko asset_platform_ids for assets filtering. E.g only ones with ethereum will be include.
 
+    etherscan:
+      api_key: ~
+      network: "mainnet"
+
     blockchain_mapping:
-      ethereum: eth-mainnet
+      ethereum: eth-mainet #Why not mainnet?
     wallets_mapping:
       hot:
         ethereum: 1
@@ -22,7 +26,7 @@ datasources:
       deposit_fee:            1
       min_deposit_amount:     1
       min_collection_amount:  1
-      withdrawaw_fee:         1
+      withdraw_fee:         1
       min_withdraw_amount:    1
       withdraw_limit_24h:     1
       withdraw_limit_72h:     3

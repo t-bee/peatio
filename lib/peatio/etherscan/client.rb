@@ -2,8 +2,6 @@
 
 module Etherscan
   class Client
-    ETHERSCAN_API_KEY = "S9AKTMUAYY63TSKXFIS3Q2PVU54WJPYDFY"
-
     API_SUCCESS_STATUS = "1"
 
     NETWORKS_URLS = {
@@ -17,6 +15,9 @@ module Etherscan
 
     DEFAULT_NETWORK = :mainnet
 
+    Error    = Class.new(StandardError)
+    APIError = Class.new(Error)
+
     attr_accessor :headers, :endpoint
 
     def initialize(options={})
@@ -25,7 +26,7 @@ module Etherscan
                         .to_sym
                         .yield_self { |n| NETWORKS_URLS[n] }
 
-      @api_key = options.fetch(:api_key, ETHERSCAN_API_KEY)
+      @api_key = options[:api_key]
       @idle_timeout = options.fetch(:idle_timeout, 5)
       @headers = {"Accept"       => "application/json",
                   "Content-Type" => "application/json"}
@@ -40,7 +41,7 @@ module Etherscan
       end
 
       JSON(response.body).deep_symbolize_keys.yield_self do |body|
-        raise Etherscan::APIError, body if body[:status] != API_SUCCESS_STATUS || body[:result].blank?
+        raise APIError, body if body[:status] != API_SUCCESS_STATUS || body[:result].blank?
 
         body[:result]
       end
